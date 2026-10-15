@@ -1,0 +1,8 @@
+.venv/
+.astro/
+.env
+airflow.db
+logs/
+__pycache__/
+*.pyc
+.pytest_cache/

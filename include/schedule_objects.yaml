@@ -1,0 +1,29 @@
+# Scheduling objects (Automic EVNT equivalent).
+# Each schedule object has ONE schedule and triggers MANY recurring jobs.
+# dags/schedule_objects.py generates one DAG per schedule object.
+# Jobs are existing DAG ids with `schedule=None` (generated below as placeholders).
+# TODO: Beneva to replace placeholder jobs/crons with the real ones.
+
+jobs:            # placeholder target workflows
+  - recurring_job_extract
+  - recurring_job_load
+  - recurring_job_report
+  - recurring_job_archive
+
+schedule_objects:
+  - name: evnt_hourly_business_hours
+    cron: "0 8-17 * * 1-5"
+    timezone: America/Toronto
+    jobs: [recurring_job_extract, recurring_job_load]
+
+  - name: evnt_daily_close
+    cron: "30 18 * * *"
+    timezone: America/Toronto
+    calendar_rule: every_working_day       # optional: any key of calendar_rules.RULES
+    jobs: [recurring_job_report, recurring_job_archive]
+
+  - name: evnt_weekly_friday
+    cron: "0 7 * * *"
+    timezone: America/Toronto
+    calendar_rule: friday_or_previous_working_day
+    jobs: [recurring_job_report]

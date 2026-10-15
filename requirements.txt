@@ -1,0 +1,5 @@
+# Calendar rules (Quebec statutory holidays)
+holidays>=0.58
+# Cross-account patterns: HTTP -> remote Airflow API, S3 -> cross-account role
+apache-airflow-providers-http
+apache-airflow-providers-amazon

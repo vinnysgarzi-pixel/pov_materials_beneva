@@ -1,0 +1,20 @@
+# Loaded by `astro dev start`. For deployed environments create these in the
+# Airflow UI / secrets backend instead (TODO: Beneva to choose the mechanism).
+airflow:
+  variables:
+    # Global variables shared by every workflow (criterion: global variables).
+    - variable_name: global_alert_email
+      variable_value: TODO-alerts@example.com   # TODO: Beneva alert distribution list
+    - variable_name: global_environment
+      variable_value: TODO-dev                  # TODO: dev | qa | prod
+  connections:
+    # Pattern A: remote Airflow in another AWS account (REST API).
+    - conn_id: remote_airflow_account_b
+      conn_type: http
+      conn_host: TODO-remote-airflow.example.com   # TODO: URL reachable from this account
+      conn_schema: https
+      conn_extra: '{"Authorization": "Bearer TODO-token"}'  # TODO: real auth (use a secrets backend)
+    # Pattern B: S3 marker in another AWS account via an assumed role.
+    - conn_id: aws_cross_account
+      conn_type: aws
+      conn_extra: '{"role_arn": "arn:aws:iam::TODO-ACCOUNT-ID:role/TODO-ROLE", "assume_role_method": "assume_role", "region_name": "ca-central-1"}'
