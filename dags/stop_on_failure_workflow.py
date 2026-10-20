@@ -10,8 +10,8 @@ from datetime import datetime
 
 from airflow.sdk import DAG, Param, task
 
-from alerts import notify_failure
-from job_helpers import run_with_outcome
+from include.alerts import notify_failure
+from include.job_helpers import run_with_outcome
 
 with DAG(
     dag_id="stop_on_failure_workflow",

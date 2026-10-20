@@ -10,15 +10,16 @@ from datetime import datetime
 from pathlib import Path
 
 import yaml
+import include
 from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.standard.operators.empty import EmptyOperator
 from airflow.providers.standard.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.sdk import DAG
 from airflow.timetables.trigger import CronTriggerTimetable
 
-from gates import calendar_gate
+from include.gates import calendar_gate
 
-CONFIG = yaml.safe_load((Path(__file__).parent.parent / "include" / "schedule_objects.yaml").read_text())
+CONFIG = yaml.safe_load((Path(include.__file__).parent / "schedule_objects.yaml").read_text())
 
 # Placeholder target jobs (manually/EVNT-triggered only).
 for job_id in CONFIG["jobs"]:

@@ -16,7 +16,7 @@ from airflow.providers.amazon.aws.sensors.s3 import S3KeySensor
 from airflow.providers.standard.operators.empty import EmptyOperator
 from airflow.sdk import DAG
 
-from remote_sensors import RemoteAirflowDagRunSensor
+from include.remote_sensors import RemoteAirflowDagRunSensor
 
 COMMON = dict(start_date=datetime(2026, 1, 1), catchup=False, tags=["beneva", "cross-account"])
 

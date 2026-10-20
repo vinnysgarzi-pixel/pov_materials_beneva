@@ -1,11 +1,11 @@
 from unittest import mock
 
-from remote_sensors import RemoteAirflowDagRunSensor
+from include.remote_sensors import RemoteAirflowDagRunSensor
 
 
 def _poke(runs):
     sensor = RemoteAirflowDagRunSensor(task_id="t", remote_dag_id="d", end_date_gte="2026-01-01T00:00:00Z")
-    with mock.patch("remote_sensors.HttpHook") as hook:
+    with mock.patch("include.remote_sensors.HttpHook") as hook:
         hook.return_value.run.return_value.json.return_value = {"dag_runs": runs}
         result = sensor.poke({})
         return result, hook.return_value.run.call_args

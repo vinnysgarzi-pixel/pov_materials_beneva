@@ -15,7 +15,7 @@ from airflow.providers.standard.operators.empty import EmptyOperator
 from airflow.sdk import DAG, Param, task
 from airflow.utils.trigger_rule import TriggerRule
 
-from job_helpers import run_with_outcome
+from include.job_helpers import run_with_outcome
 
 OUTCOMES = ["success", "failed", "skipped"]
 

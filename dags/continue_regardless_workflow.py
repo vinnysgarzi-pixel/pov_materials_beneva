@@ -10,7 +10,7 @@ from datetime import datetime
 from airflow.sdk import DAG, Param, task
 from airflow.utils.trigger_rule import TriggerRule
 
-from job_helpers import run_with_outcome
+from include.job_helpers import run_with_outcome
 
 with DAG(
     dag_id="continue_regardless_workflow",

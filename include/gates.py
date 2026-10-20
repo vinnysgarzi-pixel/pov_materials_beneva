@@ -6,7 +6,7 @@ from zoneinfo import ZoneInfo
 
 from airflow.providers.standard.operators.python import ShortCircuitOperator
 
-from calendar_rules import RULES
+from include.calendar_rules import RULES
 
 TIMEZONE = ZoneInfo("America/Toronto")  # Quebec; TODO: confirm with Beneva
 

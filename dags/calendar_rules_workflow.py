@@ -18,8 +18,8 @@ from airflow.providers.standard.operators.empty import EmptyOperator  # TODO: re
 from airflow.sdk import DAG, Param
 from airflow.timetables.trigger import CronTriggerTimetable
 
-from alerts import notify_failure
-from gates import TIMEZONE, calendar_gate
+from include.alerts import notify_failure
+from include.gates import TIMEZONE, calendar_gate
 
 JOBS = {
     "job_friday": "friday_or_previous_working_day",

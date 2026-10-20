@@ -46,7 +46,7 @@ pytest
 ├── requirements.txt           # holidays, http + amazon providers
 ├── packages.txt               # OS packages (empty)
 ├── airflow_settings.yaml      # local-dev Variables + Connections (placeholders)
-├── pytest.ini                 # puts include/ and dags/ on the import path for tests
+├── pytest.ini                 # puts the project root on the import path for tests
 ├── dags/                      # one file per criterion (see below)
 ├── include/                   # shared, non-DAG code and config (see below)
 └── tests/                     # rule unit tests, DAG import tests, sensor test
@@ -262,7 +262,8 @@ Trade-off: the DAG creates a run every day, with non-matching jobs shown as skip
 - **Reuse.** Logic written once (calendar rules, alerting, sensors) is imported by many DAGs, so a fix or change applies everywhere.
 - **Testability.** Plain Python with no Airflow dependency (like `calendar_rules.py`) can be unit-tested in milliseconds.
 - **Config as data.** Things like `schedule_objects.yaml` let non-developers change schedules without touching DAG code.
-- **Deployed with the project.** Astro copies `include/` into the image alongside `dags/`, and it is on the Python path in Astro Runtime so DAGs can `import` from it directly (`from calendar_rules import RULES`).
+- **Deployed with the project.** Astro copies `include/` into the image alongside `dags/`, and the project root is on the Python path in Astro Runtime, so DAGs import from it as a package (`from include.calendar_rules import RULES`). `include/` must contain an `__init__.py`; importing modules as top-level names (`from alerts import ...`) fails with `ModuleNotFoundError`.
+- **Needs an image deploy.** `include/` is baked into the Astro image; a DAG-only deploy does not ship or update it. Run a full `astro deploy` whenever `include/` changes.
 
 **What's in it**
 

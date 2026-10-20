@@ -1,6 +1,6 @@
 from datetime import date, timedelta
 
-import calendar_rules as cr
+from include import calendar_rules as cr
 
 
 def matches(rule, year):
